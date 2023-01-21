@@ -101,7 +101,3 @@ Already set up [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/
 NOTICE: The template does not use [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) and [prettier-eslint](https://github.com/prettier/prettier-eslint). So I recommend that running commands individually. e.g. `prettier && eslint`.
 
 Please read: https://prettier.io/docs/en/integrating-with-linters.html.
-
-# ToDo
-
-- [x] install and set up [TailwindCSS/JIT](https://github.com/tailwindlabs/tailwindcss-jit) see this [PR](https://github.com/TeXmeijin/vite-react-ts-tailwind-starter/pull/1)
