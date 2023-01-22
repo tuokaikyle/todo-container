@@ -4,17 +4,11 @@ import { useState, useEffect, useRef } from 'react';
 
 function Index() {
   const gridRef = useRef();
-
   const [state, setState] = useState({
     count: 0,
     info: '',
-    items: [
-      { x: 2, y: 1, h: 2 },
-      { x: 2, y: 4, w: 3 },
-      { x: 4, y: 2 },
-      { x: 3, y: 1, h: 2 },
-      { x: 0, y: 6, w: 2, h: 2 },
-    ],
+    items: [],
+    color: '',
   });
 
   useEffect(() => {
@@ -23,12 +17,12 @@ function Index() {
       GridStack.init(
         {
           float: true,
-          cellHeight: '70px',
+          cellHeight: '50px',
           minRow: 1,
+          margin: 5,
         },
         '.uncontrolled'
       );
-
     const grid = gridRef.current;
 
     grid.on('dragstop', (event, element) => {
@@ -49,23 +43,43 @@ function Index() {
     });
   }, []);
 
+  const getNode = function () {
+    let n = state.items[state.count] || {
+      x: 0,
+      y: 0,
+      w: 2,
+      h: 2,
+    };
+    n.content = n.content || String(state.count);
+    n.color = 'bg-lime-200';
+    setState((prevState) => ({
+      ...prevState,
+      count: prevState.count + 1,
+    }));
+    return n;
+  };
+
+  const makeNewWidget = function () {
+    let n = getNode();
+    let doc = document.implementation.createHTMLDocument();
+    doc.body.innerHTML = `
+    <div class="item ${n.color} rounded-2xl" gs-x="${n.x}" gs-y="${n.y}" gs-w="${n.w || 1}" gs-h="${n.h || 1}">
+      <div class="grid-stack-item-content">${n.content}</div>
+    </div>
+    </div>`;
+    let el = doc.body.children[0];
+    const grid = gridRef.current;
+    grid.el.appendChild(el);
+    // example showing when DOM is created elsewhere (eg Angular/Vue/React) and GS is used to convert to a widget
+    let w = grid.makeWidget(el);
+  };
+
   return (
     <div>
       <button
+        className="btn"
         onClick={() => {
-          const grid = gridRef.current;
-          const node = state.items[state.count] || {
-            x: Math.round(12 * Math.random()),
-            y: Math.round(5 * Math.random()),
-            w: Math.round(1 + 3 * Math.random()),
-            h: Math.round(1 + 3 * Math.random()),
-          };
-          node.id = node.content = String(state.count);
-          setState((prevState) => ({
-            ...prevState,
-            count: prevState.count + 1,
-          }));
-          grid.addWidget(node);
+          makeNewWidget();
         }}
       >
         Add Widget
