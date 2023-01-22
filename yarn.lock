@@ -2199,6 +2199,11 @@ grapheme-splitter@^1.0.4:
   resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
 
+gridstack@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/gridstack/-/gridstack-7.2.2.tgz#1a5be730923722c88685641809f36c9681d329bd"
+  integrity sha512-9swEjbisKhtZlbmNiTCxOarp/9NWit5mLg6Z73sUhd4LKur5ZptMH16CUJu7HjMHxgI86FbQI5ZfMM/2TuMqdw==
+
 has-bigints@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/has-bigints/-/has-bigints-1.0.1.tgz#64fe6acb020673e3b78db035a5af69aa9d07b113"

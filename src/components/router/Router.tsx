@@ -5,6 +5,7 @@ import { Outlet, RouteObject, useRoutes, BrowserRouter } from 'react-router-dom'
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
 const IndexScreen = lazy(() => import('~/components/screens/Index'));
+const HahaScreen = lazy(() => import('~/components/screens/Haha'));
 const Page404Screen = lazy(() => import('~/components/screens/404'));
 
 function Layout() {
@@ -30,11 +31,24 @@ const InnerRouter = () => {
   const routes: RouteObject[] = [
     {
       path: '/',
-      element: <Layout />,
       children: [
         {
           index: true,
           element: <IndexScreen />,
+        },
+        {
+          path: '*',
+          element: <Page404Screen />,
+        },
+      ],
+    },
+    {
+      path: '/haha',
+      element: <Layout />,
+      children: [
+        {
+          index: true,
+          element: <HahaScreen />,
         },
         {
           path: '*',
