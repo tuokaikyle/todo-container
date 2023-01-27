@@ -6,6 +6,7 @@ const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p
 
 const IndexScreen = lazy(() => import('~/components/screens/Index'));
 const HahaScreen = lazy(() => import('~/components/screens/Haha'));
+const RglScreen = lazy(() => import('~/components/screens/Rgl'));
 const Page404Screen = lazy(() => import('~/components/screens/404'));
 
 function Layout() {
@@ -49,6 +50,19 @@ const InnerRouter = () => {
         {
           index: true,
           element: <HahaScreen />,
+        },
+        {
+          path: '*',
+          element: <Page404Screen />,
+        },
+      ],
+    },
+    {
+      path: '/rgl',
+      children: [
+        {
+          index: true,
+          element: <RglScreen />,
         },
         {
           path: '*',

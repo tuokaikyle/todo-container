@@ -1,5 +1,5 @@
 import 'gridstack/dist/gridstack.min.css';
-import { GridStack } from 'gridstack';
+import { dragInDefaultOptions, GridStack } from 'gridstack';
 import { useState, useEffect, useRef } from 'react';
 
 function Index() {
@@ -18,8 +18,14 @@ function Index() {
         {
           float: true,
           cellHeight: '50px',
-          minRow: 1,
           margin: 5,
+          maxRow: 12,
+          minRow: 12,
+          disableOneColumnMode: true,
+          acceptWidgets: true,
+          dragIn: '.newWidget', // class that can be dragged from outside
+          dragInOptions: { appendTo: 'body', helper: 'clone' }, // clone or can be your function
+          removable: '#trash', // drag-out delete class
         },
         '.uncontrolled'
       );
@@ -51,7 +57,7 @@ function Index() {
       h: 2,
     };
     n.content = n.content || String(state.count);
-    n.color = 'bg-lime-200';
+    n.color = 'bg-yellow-200';
     setState((prevState) => ({
       ...prevState,
       count: prevState.count + 1,
@@ -63,8 +69,8 @@ function Index() {
     let n = getNode();
     let doc = document.implementation.createHTMLDocument();
     doc.body.innerHTML = `
-    <div class="item ${n.color} rounded-2xl" gs-x="${n.x}" gs-y="${n.y}" gs-w="${n.w || 1}" gs-h="${n.h || 1}">
-      <div class="grid-stack-item-content">${n.content}</div>
+    <div class="item" gs-x="${n.x}" gs-y="${n.y}" gs-w="${n.w || 1}" gs-h="${n.h || 1}">
+      <div class="grid-stack-item-content ${n.color} rounded-xl">${n.content}</div>
     </div>
     </div>`;
     let el = doc.body.children[0];
@@ -76,6 +82,13 @@ function Index() {
 
   return (
     <div>
+      <div className="newWidget grid-stack-item">
+        <div className="grid-stack-item-content">
+          <div>
+            <span>Drag me in the dashboard!</span>
+          </div>
+        </div>
+      </div>
       <button
         className="btn"
         onClick={() => {
@@ -85,7 +98,7 @@ function Index() {
         Add Widget
       </button>
       <div>{JSON.stringify(state)}</div>
-      <section className="grid-stack uncontrolled"></section>
+      <section className="grid-stack uncontrolled w-2/3 h-2/3 mx-auto border-4"></section>
     </div>
   );
 }
